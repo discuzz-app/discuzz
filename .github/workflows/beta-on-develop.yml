@@ -3,7 +3,12 @@ name: Beta release on Develop
 on:
   push:
     branches: [ develop ]
-
+    paths-ignore:
+      - '.gitlab-ci.yml'
+      - 'README.md'
+      - 'LICENSE'
+      - 'docs/**'
+      
 jobs:
   prerelease:
     name: Beta release

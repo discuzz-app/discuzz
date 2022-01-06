@@ -45,7 +45,7 @@ jobs:
 
       - name: Set version
         run: |
-          yarn version:set $GITHUB_REF_NAME --no-git-tag-version --preid pre && ((yarn version:commit && git push origin main) || (echo "Nothing to commit"))
+          yarn version:set $GITHUB_REF_NAME --no-git-tag-version && ((yarn version:commit && git push origin main) || (echo "Nothing to commit"))
 
       - name: Publish to NPM
         run: |

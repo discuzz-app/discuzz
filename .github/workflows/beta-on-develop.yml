@@ -45,8 +45,8 @@ jobs:
           export SKIP_PREFLIGHT_CHECK=true
           export PUBLIC_URL=https://discuzz.mph.am/
           export BASE_URL=$PUBLIC_URL
-          export SERVICE_CONFIG=${{ secrets.SERVICE_CONFIG }}
-          export AUTHS=${{ secrets.AUTHS }}
+          export SERVICE_CONFIG="${{ secrets.SERVICE_CONFIG }}"
+          export AUTHS="${{ secrets.AUTHS }}"
           yarn build
 
       - name: Set version

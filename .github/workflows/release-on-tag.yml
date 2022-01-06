@@ -85,7 +85,7 @@ jobs:
           mv ./.git ../.git
           cd ..
           # Push build into the docs branch
-          mv docs-build BUILD
+          mv build BUILD
           echo "Pushing build $GIT_COMMIT to $DEPLOY_BRANCH"
           mv .git BUILD/.git
           cd BUILD

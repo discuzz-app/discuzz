@@ -40,22 +40,22 @@ jobs:
         run: |
           yarn --prefer-offline --pure-lockfile --cache-folder .yarn --modules-folder node_modules
 
-      # - name: Build
-      #   run: |
-      #     export BASE_URL=$PUBLIC_URL
-      #     yarn build
-      #   env:
-      #     SKIP_PREFLIGHT_CHECK: true
-      #     PUBLIC_URL: https://discuzz.mph.am/
-      #     SERVICE_CONFIG: ${{ secrets.SERVICE_CONFIG }}
-      #     AUTHS: ${{ secrets.AUTHS }}
+      - name: Build
+        run: |
+          export BASE_URL=$PUBLIC_URL
+          yarn build
+        env:
+          SKIP_PREFLIGHT_CHECK: true
+          PUBLIC_URL: https://discuzz.mph.am/
+          SERVICE_CONFIG: ${{ secrets.SERVICE_CONFIG }}
+          AUTHS: ${{ secrets.AUTHS }}
 
-      # - name: Set version
-      #   run: |
-      #     yarn version:set prepatch --no-git-tag-version --preid beta-$GITHUB_SHA && yarn version:commit
+      - name: Set version
+        run: |
+          yarn version:set prepatch --no-git-tag-version --preid beta-$GITHUB_SHA && yarn version:commit
 
-      # - name: Publish to NPM
-      #   run: |
-      #     yarn version:release --dist-tag beta
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+      - name: Publish to NPM
+        run: |
+          yarn version:release --dist-tag beta
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}

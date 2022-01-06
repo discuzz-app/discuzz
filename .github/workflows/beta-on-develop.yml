@@ -46,7 +46,7 @@ jobs:
           yarn build
         env:
           SKIP_PREFLIGHT_CHECK: true
-          PUBLIC_URL: https://discuzz.mph.am/
+          PUBLIC_URL: https://beta.discuzz.mph.am/
           SERVICE_CONFIG: ${{ secrets.SERVICE_CONFIG }}
           AUTHS: ${{ secrets.AUTHS }}
 

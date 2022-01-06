@@ -34,11 +34,21 @@ jobs:
           path: |
             ./node_modules
             ./.yarn
-          key: ${{ runner.os }}-modules-${{ hashFiles('./yarn.lock') }}
+          key: ${{ runner.os }}-yarn-modules-${{ hashFiles('./yarn.lock') }}
 
       - name: Install build dependencies
         run: |
-          yarn install --prefer-offline --pure-lockfile --cache-folder .yarn --modules-folder node_modules
+          yarn --prefer-offline --pure-lockfile --cache-folder .yarn --modules-folder node_modules
+
+      - name: Build
+        run: |
+          export BASE_URL=$PUBLIC_URL
+          yarn build
+        env:
+          SKIP_PREFLIGHT_CHECK: true
+          PUBLIC_URL: https://next.discuzz.mph.am/
+          SERVICE_CONFIG: ${{ secrets.SERVICE_CONFIG }}
+          AUTHS: ${{ secrets.AUTHS }}
 
       - name: Set version
         run: |

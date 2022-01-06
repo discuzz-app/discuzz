@@ -1,0 +1,13 @@
+{
+  "packages": [
+    "packages/*"
+  ],
+  "version": "1.1.2-beta-sha2.0",
+  "includeMergedTags": true,
+  "command": {
+    "publish": {
+      "yes": true,
+      "verifyAccess": false
+    }
+  }
+}

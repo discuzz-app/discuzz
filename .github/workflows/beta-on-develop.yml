@@ -38,10 +38,15 @@ jobs:
 
       - name: Install build dependencies
         run: |
-          yarn install --prefer-offline --pure-lockfile --cache-folder .yarn --modules-folder node_modules
+          yarn --prefer-offline --pure-lockfile --cache-folder .yarn --modules-folder node_modules
 
       - name: Build
         run: |
+          export SKIP_PREFLIGHT_CHECK=true
+          export PUBLIC_URL=https://discuzz.mph.am/
+          export BASE_URL=$PUBLIC_URL
+          export SERVICE_CONFIG=${{ secrets.SERVICE_CONFIG }}
+          export AUTHS=${{ secrets.AUTHS }}
           yarn build
 
       - name: Set version

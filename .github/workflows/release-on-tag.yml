@@ -89,6 +89,7 @@ jobs:
           echo "Pushing build $GIT_COMMIT to $DEPLOY_BRANCH"
           mv .git BUILD/.git
           cd BUILD
+          cp index.html 404.html
           git status
           git add -A
           git commit -m "Automated Pages build $GIT_COMMIT"

@@ -40,6 +40,11 @@ export class WebComponent extends HTMLElement {
       config.pagination = Number(this.getAttribute('pagination'))
     }
 
+    let logLevel: any
+    if (this.getAttribute('logLevel')) {
+      logLevel = this.getAttribute('logLevel')
+    }
+
     options.config = config
 
     ReactDOM.render(
@@ -56,7 +61,7 @@ export class WebComponent extends HTMLElement {
               viewer: options.config.richText ? ViewerMarkdown : ViewerPlaintext
             }}
             locale={options.locale === 'vi' ? LocaleProviderVi : LocaleProviderEn}
-            logLevel="debug"
+            logLevel={logLevel}
           />
         </Suspense>
       ),

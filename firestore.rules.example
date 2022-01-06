@@ -49,13 +49,8 @@ service cloud.firestore {
       			  && data.url == currentData.url
       			  && data.author == currentData.author
       			  && data.parentId == currentData.parentId
-      			  && data.replied == currentData.replied
       			  && data.approvedAt == currentData.approvedAt
       			  && data.createdAt == currentData.createdAt
-      			  && (
-                !("updatedAt" in data)
-                || data.updatedAt == currentData.updatedAt
-              )
     }
     function postVoteIsNotChanged(data, currentData) {
       return  data.voted == currentData.voted

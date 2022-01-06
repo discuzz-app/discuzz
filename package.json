@@ -43,7 +43,7 @@
   "scripts": {
     "lerna": "lerna",
     "libbuild": "lerna run libbuild --stream",
-    "libstart": "lerna run start --stream",
+    "libstart": "lerna run --parallel start --stream",
     "appstart": "if [[ -f \"./.env\" ]]; then . ./.env; fi && react-scripts start",
     "start": "run-p libstart appstart",
     "prebuild": "run-s libbuild",

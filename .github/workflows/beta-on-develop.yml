@@ -34,7 +34,7 @@ jobs:
           path: |
             ./node_modules
             ./.yarn
-          key: ${{ runner.os }}-modules-${{ hashFiles('./yarn.lock') }}
+          key: ${{ runner.os }}-yarn-modules-${{ hashFiles('./yarn.lock') }}
 
       - name: Install build dependencies
         run: |

@@ -1,6 +1,6 @@
 {
   "name": "@discuzz/composer-markdown",
-  "version": "1.1.2",
+  "version": "1.1.5",
   "description": "Discuzz composer markdown",
   "author": "MartinPham",
   "license": "MIT",
@@ -17,15 +17,13 @@
     "start": "microbundle-crl watch --no-compress --format cjs"
   },
   "dependencies": {
-    "@discuzz/core": "*"
+    "@discuzz/core": "^1.1.5"
   },
   "peerDependencies": {
     "react": "^17.0.0",
     "react-is": "^17.0.0"
   },
   "devDependencies": {
-    "rich-markdown-editor": "^11.21.3",
-    "styled-components": "^5.3.3",
     "@types/node": "^16.7.13",
     "@types/react": "^17.0.20",
     "@types/react-dom": "^17.0.9",
@@ -47,6 +45,8 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.4",
     "react": "^17.0.0",
+    "rich-markdown-editor": "^11.21.3",
+    "styled-components": "^5.3.3",
     "typescript": "^4.4.2"
   },
   "publishConfig": {

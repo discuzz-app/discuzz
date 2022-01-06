@@ -36,9 +36,9 @@ jobs:
             ./.yarn
           key: ${{ runner.os }}-modules-${{ hashFiles('./yarn.lock') }}
 
-      # - name: Install build dependencies
-      #   run: |
-      #     yarn --prefer-offline --pure-lockfile --cache-folder .yarn --modules-folder node_modules
+      - name: Install build dependencies
+        run: |
+          yarn --prefer-offline --pure-lockfile --cache-folder .yarn --modules-folder node_modules
 
       # - name: Build
       #   run: |

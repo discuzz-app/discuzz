@@ -69,10 +69,10 @@ export class WebComponent extends HTMLElement {
 
 if (process.env.NODE_ENV === 'production') {
   if (global.customElements) {
-    customElements.define('x-firetalk', WebComponent)
+    customElements.define('x-discuzz', WebComponent)
   }
 } else {
-  customElements.define('x-firetalk-dev', WebComponent)
+  customElements.define('x-discuzz-dev', WebComponent)
 
   const url = new URL(global.location.toString())
   const pathname = url.pathname.toString()
@@ -81,7 +81,7 @@ if (process.env.NODE_ENV === 'production') {
   const ftTheme = url.searchParams.get('theme') || 'auto'
 
   document.getElementById('root')!.innerHTML = `
-    <x-firetalk-dev
+    <x-discuzz-dev
       url="${ftUrl}"  
       locale="${ftLocale}"  
       theme="${ftTheme}"  
@@ -89,6 +89,6 @@ if (process.env.NODE_ENV === 'production') {
       service="${process.env.REACT_APP_SERVICE_CONFIG}"
       auths="${process.env.REACT_APP_AUTHS}"
       pagination="2"
-  ></x-firetalk>
+  ></x-discuzz-dev>
   `
 }

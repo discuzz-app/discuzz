@@ -21,7 +21,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-  <title>Fire Talk</title>
+  <title>Discuzz</title>
 </head>
 
 <body style="margin: 0; padding: 0">
@@ -45,14 +45,14 @@
     const ftLocale = url.searchParams.get('locale') || 'en'
     const ftTheme = url.searchParams.get('theme') || 'auto'
     const html = `
-      <x-firetalk 
+      <x-discuzz 
         url="${ftUrl}"
         locale="${ftLocale}"
         theme="${ftTheme}"  
         baseUrl="$BASE_URL"
         service="$SERVICE_CONFIG"
         auths="$AUTHS"
-		  ></x-firetalk>
+		  ></x-discuzz>
     `
 
     document.getElementById('root').innerHTML = 

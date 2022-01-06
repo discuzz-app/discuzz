@@ -1,0 +1,68 @@
+name: Release on Tag
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [lts/*]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          ref: main
+
+      - name: Configure Git
+        run: |
+          git config --global user.name $GITHUB_ACTOR
+          git config --global user.email $GITHUB_ACTOR@users.noreply.github.com
+
+      - name: Setup Node ${{ matrix.node_version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./node_modules
+            ./.yarn
+          key: ${{ runner.os }}-modules-${{ hashFiles('./yarn.lock') }}
+
+      - name: Install dependencies
+        run: |
+          yarn install --prefer-offline --pure-lockfile --cache-folder .yarn --modules-folder node_modules
+
+      - name: Set version
+        run: |
+          yarn version:set $GITHUB_REF_NAME --no-git-tag-version --preid pre && ((yarn version:commit && git push origin main) || (echo "Nothing to commit"))
+
+      - name: Publish to NPM
+        run: |
+          yarn version:release
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+
+      - name: Merge to develop
+        run: |
+          (git checkout -b develop) || (git checkout develop)
+          (git pull --depth 1 origin develop --rebase -X theirs --allow-unrelated-histories) || (echo "Develop branch synced")
+          git merge -s recursive -X theirs main --allow-unrelated-histories --no-commit
+          ((yarn version:commit && git push origin develop) || (echo "Nothing to commit"))
+          
+      - name: Create release
+        uses: "marvinpinto/action-automatic-releases@latest"
+        continue-on-error: true
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false

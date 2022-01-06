@@ -1,0 +1,73 @@
+{
+  "name": "discuz",
+  "version": "1.0.0",
+  "description": "discuz",
+  "main": "index.js",
+  "repository": "",
+  "author": "martinpham.com",
+  "license": "",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "@types/jest": "^27.0.1",
+    "@types/md5": "^2.3.1",
+    "@types/node": "^16.7.13",
+    "@types/react": "^17.0.20",
+    "@types/react-dom": "^17.0.9",
+    "@types/styled-components": "^5.1.19",
+    "@typescript-eslint/eslint-plugin": "^5.8.1",
+    "@typescript-eslint/parser": "^5.8.1",
+    "lerna": "^4.0.0",
+    "source-map-explorer": "^2.5.2",
+    "npm-run-all": "^4.1.5",
+    "react-scripts": "5.0.0",
+    "typescript": "^4.5.4"
+  },
+  "dependencies": {
+    "@discuzz/discuzz": "*",
+    "@discuzz/viewer-markdown": "*",
+    "@discuzz/viewer-plaintext": "*",
+    "@discuzz/composer-markdown": "*",
+    "@discuzz/composer-plaintext": "*",
+    "@discuzz/locale-en": "*",
+    "@discuzz/locale-vi": "*",
+    "date-fns": "^2.27.0",
+    "markdown-to-jsx": "^7.1.5",
+    "rich-markdown-editor": "^11.21.3",
+    "styled-components": "^5.3.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "scripts": {
+    "lerna": "lerna",
+    "libbuild": "lerna run libbuild --stream",
+    "libstart": "lerna run --parallel start --stream",
+    "appstart": "if [[ -f \"./.env\" ]]; then . ./.env; fi && react-scripts start",
+    "start": "run-p libstart appstart",
+    "prebuild": "run-s libbuild",
+    "build": "if [[ -f \"./.env\" ]]; then . ./.env; fi && GENERATE_SOURCEMAP=false react-scripts build && mv build/index.html build/tmp.html && envsubst < build/tmp.html > build/index.html && rm build/tmp.html && cp build/static/js/main.*.js build/static/js/main.js",
+    "deploy": "run-s build && firebase deploy",
+    "version:set": "lerna version",
+    "version:commit": "git add -A && git commit -m \"Automated commit version `node -p 'require(\"./lerna.json\").version'`\"",
+    "version:release": "lerna publish from-package"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "semi": false,
+    "trailingComma": "none"
+  }
+}

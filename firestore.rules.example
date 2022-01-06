@@ -1,0 +1,177 @@
+rules_version = '2'
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function userIsLoggedIn(auth) {
+      return auth != null
+    }
+
+    function userIsVerified(auth) {
+      return auth.token.email_verified
+    }
+
+    function userWillBeOwner(auth, data) {
+      return auth.uid == data.author.id
+    }
+
+    function userIsOwner(auth, currentData) {
+      return auth.uid == currentData.author.id
+    }
+
+    function userIsAdmin(auth) {
+      return 	auth.token.firebase.sign_in_provider == "google.com"
+      				&& auth.token.email_verified
+            	&& auth.token.email == "YOUR-EMAIL-HERE@HOSTNAME"
+    }
+    
+    function requireModeration() {
+      return false
+    }
+
+    function requireAnonymousModeration() {
+      return false
+    }
+
+    function postIsValid(data) {
+      return data.contents != ""
+    }
+    
+    function postIsNotDeleted(currentData) {
+      return !("deletedAt" in currentData)
+    }
+
+    function postContentsIsNotChanged(data, currentData) {
+      return  data.contents == currentData.contents
+    }
+
+    function postDataIsNotChanged(data, currentData) {
+      return  data.paths == currentData.paths
+      			  && data.url == currentData.url
+      			  && data.author == currentData.author
+      			  && data.parentId == currentData.parentId
+      			  && data.approvedAt == currentData.approvedAt
+      			  && data.createdAt == currentData.createdAt
+    }
+    function postVoteIsNotChanged(data, currentData) {
+      return  data.voted == currentData.voted
+      			  && data.voters == currentData.voters
+    }
+
+    function postIsBeingDeleted(data, currentData) {
+      return  data.contents == ""
+              && postIsNotDeleted(currentData)
+              && postDataIsNotChanged(data, currentData)
+    }
+
+    function postIsBeingEdited(data, currentData) {
+      return  postIsValid(data)
+              && postIsNotDeleted(currentData)
+              && postDataIsNotChanged(data, currentData)
+              && postVoteIsNotChanged(data, currentData)
+    }
+
+    function postCanBeVoted(data, currentData) {
+      return  "voters" in data
+              && "voted" in data
+              && postIsNotDeleted(currentData)
+              && postDataIsNotChanged(data, currentData)
+              && postContentsIsNotChanged(data, currentData)
+    }
+
+    function postIsBeingVoted(auth, data, currentData) {
+      return  postCanBeVoted(data, currentData)
+              && data.voted - currentData.voted == 1
+              && (auth.uid in data.voters)
+              && !(auth.uid in currentData.voters)
+    }
+    
+    function postIsBeingUnVoted(auth, data, currentData) {
+      return  postCanBeVoted(data, currentData)
+              && currentData.voted - data.voted == 1
+              && !(auth.uid in data.voters)
+              && (auth.uid in currentData.voters)
+    }
+      
+    match /check/imAdmin {
+    	allow read:   if  userIsAdmin(request.auth)
+    }
+
+    match /check/requireModeration {
+    	allow read:   if  !requireModeration()
+    }
+
+    match /check/requireAnonymousModeration {
+    	allow read:   if  !requireAnonymousModeration()
+    }
+    
+    match /pending_posts/{document=**} {
+      // allows only admin can see list
+    	allow list:   if  userIsAdmin(request.auth)
+
+      // allows owner can read
+    	allow read:   if  userIsOwner(request.auth, resource.data)
+
+      // allows admin can read
+    	allow read:   if  userIsAdmin(request.auth)
+
+      // allows user can create
+      allow create: if 	userIsLoggedIn(request.auth) 
+      									&& postIsValid(request.resource.data)
+      									&& userWillBeOwner(request.auth, request.resource.data)
+
+      // allows admin can update       
+      allow update: if  userIsAdmin(request.auth)
+
+      // allows admin can delete
+      allow delete: if  userIsAdmin(request.auth)
+    }
+    
+    match /posts/{document=**} {
+      // allows anyone can see list
+    	allow list:   if  true
+
+      // allows anyone can read
+    	allow read:   if  true
+
+      // allows admin to create post
+      allow create: if  userIsAdmin(request.auth)
+
+      // allows user to create post
+      allow create: if  userIsVerified(request.auth) 
+                        && !requireModeration()
+      									&& postIsValid(request.resource.data)
+      									&& userWillBeOwner(request.auth, request.resource.data)
+
+      // allows anonymous to create post
+      allow create: if  userIsLoggedIn(request.auth) 
+                        && !requireAnonymousModeration()
+      									&& postIsValid(request.resource.data)
+      									&& userWillBeOwner(request.auth, request.resource.data)
+
+      // allows admin to edit post
+      allow update: if  userIsAdmin(request.auth)
+                        && postIsBeingEdited(request.resource.data, resource.data)
+
+      // allows owner to edit post
+      allow update: if  userIsOwner(request.auth, request.resource.data) 
+                        && postIsBeingEdited(request.resource.data, resource.data)
+                        && (
+                          (userIsVerified(request.auth) && !requireModeration())
+                          || (userIsLoggedIn(request.auth) && !requireAnonymousModeration())
+                        )
+
+      // allows owner to delete post
+      allow update: if  userIsOwner(request.auth, resource.data) 
+                       	&& postIsBeingDeleted(request.resource.data, resource.data)
+
+      // allows user to vote post
+      allow update: if  userIsVerified(request.auth) 
+                        && (
+                          (postIsBeingVoted(request.auth, request.resource.data, resource.data))
+                          || (postIsBeingUnVoted(request.auth, request.resource.data, resource.data))
+                     	  )
+                       
+      allow delete: if userIsAdmin(request.auth)
+    }
+  }
+}

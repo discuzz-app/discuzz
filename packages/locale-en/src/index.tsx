@@ -1,4 +1,4 @@
-import { createProvider } from '@discuzz/discuzz'
+import { createProvider } from '@discuzz/core'
 import locale from 'date-fns/locale/en-US'
 import { formatDistance } from 'date-fns'
 

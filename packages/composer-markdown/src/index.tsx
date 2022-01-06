@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import useTheme from '@mui/material/styles/useTheme'
 import Editor from 'rich-markdown-editor'
-import { ComposerProps } from '@discuzz/discuzz'
+import { ComposerProps } from '@discuzz/core'
 
-const Composer = ({ onChange, value, placeholder }: ComposerProps) => {
-  const theme = useTheme()
-
+const Composer = ({ onChange, value, placeholder, theme }: ComposerProps) => {
   const [editorKey, setEditorKey] = useState<string>(String(Math.random()))
   const [currentValue, setCurrentValue] = useState('')
 
@@ -20,7 +17,7 @@ const Composer = ({ onChange, value, placeholder }: ComposerProps) => {
       key={editorKey}
       placeholder={placeholder}
       defaultValue={value}
-      dark={theme.palette.mode === 'dark'}
+      dark={theme === 'dark'}
       onChange={(content) => {
         const newValue = content()
 

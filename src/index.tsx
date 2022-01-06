@@ -56,6 +56,7 @@ export class WebComponent extends HTMLElement {
               viewer: options.config.richText ? ViewerMarkdown : ViewerPlaintext
             }}
             locale={options.locale === 'vi' ? LocaleProviderVi : LocaleProviderEn}
+            logLevel="debug"
           />
         </Suspense>
       ),

@@ -19,6 +19,7 @@ export type { Config } from 'components/App'
 export type { ComposerProps } from 'components/PostComposer'
 export type { ContentProps } from 'components/PostCard'
 
+
 export type DiscuzzCoreProps = {
   url: string,
   service: {
@@ -42,6 +43,7 @@ export const DiscuzzCore = ({
     ...appConfig,
     ...(config || {})
   }
+
   return (
     <SnackbarProvider maxSnack={1}>
       <ServiceSourceProvider config={service}>

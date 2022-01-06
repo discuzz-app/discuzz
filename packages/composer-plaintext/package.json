@@ -6,24 +6,22 @@
   "license": "MIT",
   "repository": "discuzz/discuzz",
   "main": "dist/index.js",
-  "module": "dist/index.modern.js",
+  "types": "dist/index.d.ts",
   "source": "src/index.tsx",
   "engines": {
     "node": ">=10"
   },
   "scripts": {
     "libbuild": "run-s build",
-    "build": "microbundle-crl --format modern,cjs",
-    "start": "microbundle-crl watch --no-compress --format modern,cjs"
+    "build": "microbundle-crl --format cjs",
+    "start": "microbundle-crl watch --no-compress --format cjs"
   },
   "dependencies": {
     "@discuzz/core": "*"
   },
   "peerDependencies": {
-    "@emotion/react": "^11.7.1",
-    "@emotion/styled": "^11.6.0",
-    "@mui/material": "^5.2.5",
-    "react": "^17.0.0"
+    "react": "^17.0.0",
+    "react-is": "^17.0.0"
   },
   "devDependencies": {
     "@emotion/react": "^11.7.1",

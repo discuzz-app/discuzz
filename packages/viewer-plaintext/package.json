@@ -6,21 +6,20 @@
   "license": "MIT",
   "repository": "discuzz/discuzz",
   "main": "dist/index.js",
-  "module": "dist/index.modern.js",
+  "types": "dist/index.d.ts",
   "source": "src/index.tsx",
   "engines": {
     "node": ">=10"
   },
   "scripts": {
     "libbuild": "run-s build",
-    "build": "microbundle-crl --format modern,cjs",
-    "start": "microbundle-crl watch --no-compress --format modern,cjs"
+    "build": "microbundle-crl --format cjs",
+    "start": "microbundle-crl watch --no-compress --format cjs"
   },
   "dependencies": {
     "@discuzz/core": "*"
   },
   "peerDependencies": {
-    "date-fns": "^2.27.0",
     "react": "^17.0.0"
   },
   "devDependencies": {
@@ -31,7 +30,6 @@
     "@typescript-eslint/parser": "^5.8.1",
     "babel-eslint": "^10.0.3",
     "cross-env": "^7.0.2",
-    "date-fns": "^2.27.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^6.7.0",
     "eslint-config-standard": "^16.0.3",

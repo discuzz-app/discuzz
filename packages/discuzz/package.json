@@ -6,29 +6,34 @@
   "license": "MIT",
   "repository": "discuzz/discuzz",
   "main": "dist/index.js",
-  "module": "dist/index.modern.js",
+  "types": "dist/index.d.ts",
   "source": "src/index.tsx",
   "engines": {
     "node": ">=10"
   },
   "scripts": {
     "libbuild": "run-s build",
-    "build": "microbundle-crl --format modern,cjs",
-    "start": "microbundle-crl watch --no-compress --format modern,cjs"
+    "build": "microbundle-crl --format cjs",
+    "start": "microbundle-crl watch --no-compress --format cjs"
   },
   "dependencies": {
-    "@discuzz/core": "*"
-  },
-  "peerDependencies": {
+    "@discuzz/core": "*",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
+    "@mui/icons-material": "^5.2.5",
+    "@mui/lab": "^5.0.0-alpha.61",
     "@mui/material": "^5.2.5",
+    "firebase": "^9.6.1",
+    "loglevel": "^1.8.0",
+    "md5": "^2.3.0",
+    "notistack": "^2.0.3",
+    "react-transition-group": "^4.4.2",
+    "use-immer": "^0.6.0"
+  },
+  "peerDependencies": {
     "react": "^17.0.0"
   },
   "devDependencies": {
-    "@emotion/react": "^11.7.1",
-    "@emotion/styled": "^11.6.0",
-    "@mui/material": "^5.2.5",
     "@types/node": "^16.7.13",
     "@types/react": "^17.0.20",
     "@types/react-dom": "^17.0.9",

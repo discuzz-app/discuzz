@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { ContentProps } from '@discuzz/discuzz'
+import { ContentProps } from '@discuzz/core'
 
 const Content = ({ children }: ContentProps) => {
   const content = children.split('\n').reduce((acc: JSX.Element[], item: string, index: number) => {

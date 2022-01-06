@@ -1,6 +1,6 @@
 import React from 'react'
 import InputBase from '@mui/material/InputBase'
-import { ComposerProps } from '@discuzz/discuzz'
+import { ComposerProps } from '@discuzz/core'
 
 const Composer = ({ onChange, value, placeholder }: ComposerProps) => {
   return (

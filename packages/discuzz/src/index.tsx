@@ -14,6 +14,8 @@ export { prefersDarkMode } from 'utils/darkMode'
 export { createProvider } from '@discuzz/core'
 export type { ComposerProps, ContentProps, Config } from '@discuzz/core'
 
+import logger, { LogLevelDesc } from 'loglevel'
+
 export type DiscuzzProps = {
   url: string,
   service: {
@@ -23,7 +25,8 @@ export type DiscuzzProps = {
   theme?: Theme,
   config?: Config,
 
-  locale: any
+  locale: any,
+  logLevel?: LogLevelDesc
 };
 
 export const Discuzz = ({
@@ -32,8 +35,12 @@ export const Discuzz = ({
   auths,
   theme = Theme.AUTO,
   config,
-  locale
+  locale,
+  logLevel = 'warn'
 }: DiscuzzProps) => {
+
+  logger.setLevel(logLevel)
+
   return (
     <ThemeProvider theme={
       (theme === Theme.AUTO ? prefersDarkMode : (theme === Theme.DARK)) ? darkTheme : lightTheme

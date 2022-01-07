@@ -91,6 +91,13 @@ service cloud.firestore {
               && !(auth.uid in data.voters)
               && (auth.uid in currentData.voters)
     }
+    function postRepliedIsBeingIncreased(data, currentData) {
+      return  postIsNotDeleted(currentData)
+              && postDataIsNotChanged(data, currentData)
+              && postContentsIsNotChanged(data, currentData)
+              && postVoteIsNotChanged(data, currentData)
+              && data.replied - currentData.replied == 1
+    }
       
     match /check/imAdmin {
     	allow read:   if  userIsAdmin(request.auth)
@@ -170,7 +177,17 @@ service cloud.firestore {
                           (postIsBeingVoted(request.auth, request.resource.data, resource.data))
                           || (postIsBeingUnVoted(request.auth, request.resource.data, resource.data))
                      	  )
-                       
+      
+      // allows user to increase post reply
+      allow update: if  userIsVerified(request.auth) 
+                        && !requireModeration()
+      									&& postRepliedIsBeingIncreased(request.resource.data, resource.data)
+                        
+      // allows anonymous to increase post reply
+      allow update: if  userIsLoggedIn(request.auth) 
+                        && !requireAnonymousModeration()
+      									&& postRepliedIsBeingIncreased(request.resource.data, resource.data)
+                        
       allow delete: if userIsAdmin(request.auth)
     }
   }

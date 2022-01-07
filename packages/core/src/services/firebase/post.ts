@@ -327,6 +327,8 @@ export const useAddPostCommand: AddPostCommand = () => {
           approvedAt: serverTimestamp()
         }
 
+        log("add post directly", postData)
+
         await addDoc(collection(firestore!, POST_COLLECTION), postData)
 
         await updatePostReplied(firestore!, postData)
@@ -469,6 +471,8 @@ export const updatePostReplied = async (
   const parentId =
     data!.paths.length === 0 ? undefined : data!.paths[data!.paths.length - 1]
   if (parentId) {
+    log("increase post replied", parentId)
+
     const parentDoc = doc(firestore, POST_COLLECTION, parentId)
     await updateDoc(parentDoc, {
       // savedAt: serverTimestamp(),

@@ -94,6 +94,7 @@ if (process.env.NODE_ENV === 'production') {
       service="${process.env.REACT_APP_SERVICE_CONFIG}"
       auths="${process.env.REACT_APP_AUTHS}"
       pagination="2"
+      logLevel="debug"
   ></x-discuzz-dev>
   `
 }

@@ -1,0 +1,61 @@
+name: Pre-release on Main
+
+on:
+  release:
+    types: [ prereleased ]
+
+jobs:
+  prerelease:
+    name: Pre-release
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [lts/*]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Configure Git
+        run: |
+          git config --global user.name $GITHUB_ACTOR
+          git config --global user.email $GITHUB_ACTOR@users.noreply.github.com
+        
+      - name: Setup Node ${{ matrix.node_version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./node_modules
+            ./.yarn
+          key: ${{ runner.os }}-yarn-modules-${{ hashFiles('./yarn.lock') }}
+
+      - name: Install build dependencies
+        run: |
+          yarn --prefer-offline --pure-lockfile --cache-folder .yarn --modules-folder node_modules
+
+      - name: Build
+        run: |
+          export BASE_URL=$PUBLIC_URL
+          yarn build
+        env:
+          SKIP_PREFLIGHT_CHECK: true
+          PUBLIC_URL: https://next.discuzz.mph.am/
+          SERVICE_CONFIG: ${{ secrets.SERVICE_CONFIG }}
+          AUTHS: ${{ secrets.AUTHS }}
+
+      - name: Set version
+        run: |
+          yarn version:set prerelease --no-git-tag-version --preid next-$GITHUB_SHA && yarn version:commit
+
+      - name: Publish to NPM
+        run: |
+          yarn version:release --dist-tag next
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}

@@ -28,11 +28,11 @@
   "dependencies": {
     "@discuzz/discuzz": "*",
     "@discuzz/viewer-markdown": "*",
-    "@discuzz/viewer-plaintext": "*",
     "@discuzz/composer-markdown": "*",
-    "@discuzz/composer-plaintext": "*",
     "@discuzz/locale-en": "*",
     "@discuzz/locale-vi": "*",
+    "@discuzz/auth-firebase": "*",
+    "@discuzz/data-firestore": "*",
     "date-fns": "^2.27.0",
     "markdown-to-jsx": "^7.1.5",
     "rich-markdown-editor": "^11.21.3",

@@ -4,23 +4,22 @@ import ScopedCssBaseline from '@mui/material/ScopedCssBaseline'
 import {
   DiscuzzCore,
   SignInProviderId,
-  Config
+  Config,
+  ServiceSource
 } from '@discuzz/core'
 import { prefersDarkMode } from 'utils/darkMode'
 import { darkTheme, lightTheme } from 'config/mui'
 import { Theme } from 'enums/Theme'
 export { Theme } from 'enums/Theme'
 export { prefersDarkMode } from 'utils/darkMode'
-export { createProvider } from '@discuzz/core'
-export type { ComposerProps, ContentProps, Config } from '@discuzz/core'
+export { createProvider, Auth } from '@discuzz/core'
+export type { ComposerProps, ContentProps, Config, ServiceSource } from '@discuzz/core'
 
 import logger, { LogLevelDesc } from 'loglevel'
 
 export type DiscuzzProps = {
   url: string,
-  service: {
-    [key: string]: string
-  },
+  service: ServiceSource,
   auths: SignInProviderId[],
   theme?: Theme,
   config?: Config,

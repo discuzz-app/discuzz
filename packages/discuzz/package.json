@@ -28,7 +28,8 @@
     "md5": "^2.3.0",
     "notistack": "^2.0.3",
     "react-transition-group": "^4.4.2",
-    "use-immer": "^0.6.0"
+    "use-immer": "^0.6.0",
+    "immer": "^9.0.7"
   },
   "peerDependencies": {
     "react": "^17.0.0"

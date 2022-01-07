@@ -1,12 +1,4 @@
 import { SxProps } from '@mui/material'
-import {
-  GoogleAuthProvider,
-  FacebookAuthProvider,
-  TwitterAuthProvider,
-  GithubAuthProvider,
-  OAuthProvider,
-  AuthProvider
-} from 'services/auth'
 import { SignInProviderId } from '../enums/SignInProviderId'
 
 export type SignInProvider = {
@@ -16,7 +8,6 @@ export type SignInProvider = {
     source: string;
     styles: SxProps;
   };
-  implementation: () => AuthProvider;
 };
 
 type SignInProviders = {
@@ -43,7 +34,7 @@ export const providers: SignInProviders = {
         ...baseIconStyles
       }
     },
-    implementation: () => new GoogleAuthProvider()
+    // implementation: () => new GoogleAuthProvider()
   },
 
   [SignInProviderId.APPLE]: {
@@ -59,29 +50,29 @@ export const providers: SignInProviders = {
         }
       }
     },
-    implementation: () => {
-      const provider = new OAuthProvider('apple.com')
-      provider.addScope('name')
-      provider.addScope('email')
+    // implementation: () => {
+    //   const provider = new OAuthProvider('apple.com')
+    //   provider.addScope('name')
+    //   provider.addScope('email')
 
-      return provider
-    }
+    //   return provider
+    // }
   },
 
   [SignInProviderId.FACEBOOK]: {
     id: SignInProviderId.FACEBOOK,
-    name: 'Facebook',
+    name: 'Meta (Facebook)',
     icon: {
-      source: 'https://unpkg.com/simple-icons@v6/icons/facebook.svg',
+      source: 'https://seeklogo.com/images/M/meta-icon-new-facebook-2021-logo-83520C311D-seeklogo.com.png',
       styles: {
-        bgcolor: '#4267B2',
+        bgcolor: '#fff',
         ...baseIconStyles,
         img: {
-          filter: 'invert(1)'
+          height: 'auto'
         }
       }
     },
-    implementation: () => new FacebookAuthProvider()
+    // implementation: () => new FacebookAuthProvider()
   },
   [SignInProviderId.TWITTER]: {
     id: SignInProviderId.TWITTER,
@@ -96,7 +87,7 @@ export const providers: SignInProviders = {
         }
       }
     },
-    implementation: () => new TwitterAuthProvider()
+    // implementation: () => new TwitterAuthProvider()
   },
 
   [SignInProviderId.MICROSOFT]: {
@@ -110,7 +101,7 @@ export const providers: SignInProviders = {
         ...baseIconStyles
       }
     },
-    implementation: () => new OAuthProvider('microsoft.com')
+    // implementation: () => new OAuthProvider('microsoft.com')
   },
 
   [SignInProviderId.YAHOO]: {
@@ -126,7 +117,7 @@ export const providers: SignInProviders = {
         }
       }
     },
-    implementation: () => new OAuthProvider('yahoo.com')
+    // implementation: () => new OAuthProvider('yahoo.com')
   },
 
   [SignInProviderId.GITHUB]: {
@@ -142,6 +133,6 @@ export const providers: SignInProviders = {
         }
       }
     },
-    implementation: () => new GithubAuthProvider()
+    // implementation: () => new GithubAuthProvider()
   }
 }

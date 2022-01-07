@@ -21,7 +21,7 @@ service cloud.firestore {
     function userIsAdmin(auth) {
       return 	auth.token.firebase.sign_in_provider == "google.com"
       				&& auth.token.email_verified
-            	&& auth.token.email == "YOUR-EMAIL-HERE@HOSTNAME"
+            	&& auth.token.email == "ADMIN-EMAIL@HOST.COM"
     }
     
     function requireModeration() {

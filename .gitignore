@@ -31,3 +31,5 @@ firestore.rules
 
 /packages/*/node_modules
 /packages/*/dist
+
+/tmp

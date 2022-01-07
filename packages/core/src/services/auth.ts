@@ -1,23 +1,19 @@
-export type { User, AuthProvider } from './firebase/auth'
-export {
-  GoogleAuthProvider,
-  FacebookAuthProvider,
-  TwitterAuthProvider,
-  GithubAuthProvider,
-  OAuthProvider,
-  useCurrentUser,
-  useSignIn,
-  useSignOut
-} from './firebase/auth'
+import { useAuthSource } from 'components/ServiceSourceProvider'
+import { CurrentUser, SignIn, SignOut } from 'types/AuthService'
 
-// export type { User, AuthProvider } from './memory/auth'
-// export {
-//   GoogleAuthProvider,
-//   FacebookAuthProvider,
-//   TwitterAuthProvider,
-//   GithubAuthProvider,
-//   OAuthProvider,
-//   useCurrentUser,
-//   useSignIn,
-//   useSignOut
-// } from './memory/auth'
+export const useCurrentUser: CurrentUser = () => {
+  const auth = useAuthSource()
+
+  return auth!.useCurrentUser()
+}
+
+export const useSignIn: SignIn = () => {
+  const auth = useAuthSource()
+
+  return auth!.useSignIn()
+}
+export const useSignOut: SignOut = () => {
+  const auth = useAuthSource()
+
+  return auth!.useSignOut()
+}

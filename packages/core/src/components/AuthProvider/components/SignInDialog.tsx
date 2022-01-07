@@ -45,7 +45,7 @@ export const SignInDialog = ({ enabledProviders, open, onProviderSelected }: Sig
                   src={provider.icon?.source}
                 />
               </ListItemAvatar>
-              <ListItemText primary={provider.name} />
+              <ListItemText primary={<div dangerouslySetInnerHTML={{ __html: provider.name }}></div>} />
             </ListItem>
           )
         })}

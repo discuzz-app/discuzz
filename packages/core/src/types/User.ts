@@ -1,6 +1,4 @@
-import { User as BaseUser } from 'services/auth'
-
-export type User = BaseUser & {
+export type User = {
   isAdmin?: boolean
   canSavePost?: boolean
 

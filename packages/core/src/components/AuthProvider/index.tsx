@@ -44,7 +44,7 @@ export const AuthProvider = ({ enabledProviders, children }: AuthProviderProps) 
         onProviderSelected={async (provider?: SignInProvider) => {
           if (provider) {
             try {
-              await signIn(provider.implementation())
+              await signIn(provider.id)
             } catch (error) {
               if (error instanceof Error) {
                 enqueueSnackbar(error.message, {

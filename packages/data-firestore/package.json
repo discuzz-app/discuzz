@@ -1,7 +1,7 @@
 {
-  "name": "@discuzz/viewer-plaintext",
+  "name": "@discuzz/data-firestore",
   "version": "1.11.2",
-  "description": "Discuzz viewer plaintext",
+  "description": "Discuzz data firestore",
   "author": "MartinPham",
   "license": "MIT",
   "repository": "discuzz/discuzz",
@@ -20,9 +20,14 @@
     "@discuzz/core": "^1.11.2"
   },
   "peerDependencies": {
-    "react": "^17.0.0"
+    "react": "^17.0.0",
+    "firebase": "^9.6.1",
+    "use-immer": "^0.6.0",
+    "immer": "^9.0.7"
   },
   "devDependencies": {
+    "use-immer": "^0.6.0",
+    "immer": "^9.0.7",
     "@types/node": "^16.7.13",
     "@types/react": "^17.0.20",
     "@types/react-dom": "^17.0.9",
@@ -44,6 +49,7 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^2.0.4",
     "react": "^17.0.0",
+    "firebase": "^9.6.1",
     "typescript": "^4.4.2"
   },
   "files": [

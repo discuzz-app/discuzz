@@ -1,22 +1,36 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import { ServiceSourceContext } from './contexts/ServiceSourceContext'
-import { useCurrentSource } from 'services/source'
 export { useDataSource } from './hooks/useDataSource'
+export { useAuthSource } from './hooks/useAuthSource'
 export type { ServiceSource } from './contexts/ServiceSourceContext'
+import { Auth, Data } from 'services/source'
 
 type ServiceSourceProviderProps = {
-  config: {
-    [key: string]: string
-  },
+  source: any,
   children: JSX.Element,
 };
 
-export const ServiceSourceProvider = ({ config, children }: ServiceSourceProviderProps) => {
-  const source = useCurrentSource(config)
+export const ServiceSourceProvider = ({ source, children }: ServiceSourceProviderProps) => {
+  const [auth, setAuth] = useState<Auth | undefined>(undefined)
+  const [data, setData] = useState<Data | undefined>(undefined)
 
-  return (
-    <ServiceSourceContext.Provider value={source}>
+  useEffect(() => {
+    source.auth(source.config)
+      .then((authObject: Auth) => {
+        source.data(source.config, authObject)
+          .then(setData)
+
+        setAuth(authObject)
+
+      })
+  }, [source])
+
+  return (auth && data) ? (
+    <ServiceSourceContext.Provider value={{
+      auth,
+      data
+    }}>
       {children}
     </ServiceSourceContext.Provider>
-  )
+  ) : null
 }

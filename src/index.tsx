@@ -1,21 +1,36 @@
 import React, { lazy, Suspense } from 'react'
 import ReactDOM from 'react-dom'
-import { Discuzz, Config, Theme, prefersDarkMode } from '@discuzz/discuzz'
+import { Discuzz, Config, Theme, prefersDarkMode, Auth } from '@discuzz/discuzz'
 
 const LocaleProviderEn = lazy(() => import('@discuzz/locale-en'))
 const LocaleProviderVi = lazy(() => import('@discuzz/locale-vi'))
 
-const ComposerPlaintext = lazy(() => import('@discuzz/composer-plaintext'))
 const ComposerMarkdown = lazy(() => import('@discuzz/composer-markdown'))
 
-const ViewerPlaintext = lazy(() => import('@discuzz/viewer-plaintext'))
 const ViewerMarkdown = lazy(() => import('@discuzz/viewer-markdown'))
+
+const AuthFirebase = async (config: any) => import('@discuzz/auth-firebase').then((module: any) => module.default(config))
+const DataFirestore = async (config: any, auth: Auth) => import('@discuzz/data-firestore').then((module: any) => module.default(config, auth))
 
 export class WebComponent extends HTMLElement {
   connectedCallback() {
+    const service = JSON.parse(this.getAttribute('service')!.replace(/'/g, '"'))!
+
+    const serviceSource: any = {
+      config: service.config
+    }
+    if (service.auth === 'firebase') {
+      serviceSource.auth = AuthFirebase
+    }
+    if (service.data === 'firestore') {
+      serviceSource.data = DataFirestore
+    }
+
+
+
     const options: any = {
       url: this.getAttribute('url') || global.location.href,
-      service: JSON.parse(this.getAttribute('service')!.replace(/'/g, '"'))!,
+      service: serviceSource,
       auths: JSON.parse(this.getAttribute('auths')!.replace(/'/g, '"'))!
     }
 
@@ -57,8 +72,8 @@ export class WebComponent extends HTMLElement {
             theme={options.theme}
             config={{
               ...options.config,
-              composer: options.config.richText ? ComposerMarkdown : ComposerPlaintext,
-              viewer: options.config.richText ? ViewerMarkdown : ViewerPlaintext
+              composer: options.config.richText ? ComposerMarkdown : null,
+              viewer: options.config.richText ? ViewerMarkdown : null
             }}
             locale={options.locale === 'vi' ? LocaleProviderVi : LocaleProviderEn}
             logLevel={logLevel}

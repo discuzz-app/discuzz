@@ -9,7 +9,7 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
-    if: ${{ github.event.base_ref == 'refs/heads/main' }}
+    if: ${{ github.event.base_ref == 'refs/heads/main' && !contains(github.event.ref, "-next.") }}
 
     strategy:
       matrix:

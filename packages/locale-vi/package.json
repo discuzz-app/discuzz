@@ -1,6 +1,6 @@
 {
   "name": "@discuzz/locale-vi",
-  "version": "1.11.9",
+  "version": "1.11.11",
   "description": "Discuzz locale vi",
   "author": "MartinPham",
   "license": "MIT",
@@ -17,7 +17,7 @@
     "start": "microbundle-crl watch --no-compress --format cjs"
   },
   "dependencies": {
-    "@discuzz/core": "^1.11.9"
+    "@discuzz/core": "^1.11.11"
   },
   "peerDependencies": {
     "date-fns": "^2.27.0",

@@ -2,7 +2,6 @@ name: Release on Tag
 
 on:
   push:
-    branches: [ main ]
     tags:
       - "v*"
 
@@ -10,6 +9,7 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    if: ${{ github.event.base_ref == 'refs/heads/main' }}
 
     strategy:
       matrix:

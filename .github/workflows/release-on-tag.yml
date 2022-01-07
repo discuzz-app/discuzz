@@ -93,6 +93,7 @@ jobs:
           mv .git BUILD/.git
           cd BUILD
           cp index.html 404.html
+          echo 'discuzz.mph.am' > 'CNAME'
           git status
           git add -A
           git commit -m "Automated Pages build $GIT_COMMIT"

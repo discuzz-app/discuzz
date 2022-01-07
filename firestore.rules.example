@@ -167,8 +167,8 @@ service cloud.firestore {
                           || (userIsLoggedIn(request.auth) && !requireAnonymousModeration())
                         )
 
-      // allows owner to delete post
-      allow update: if  userIsOwner(request.auth, resource.data) 
+      // allows admin / owner to delete post
+      allow update: if  (userIsAdmin(request.auth) || userIsOwner(request.auth, resource.data))
                        	&& postIsBeingDeleted(request.resource.data, resource.data)
 
       // allows user to vote post

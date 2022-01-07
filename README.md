@@ -53,6 +53,7 @@
 - With Firebase Auth support, you can provide many ways to authenticate for your users.
 - You can easily config the access control, to adjust permissions (Example: open to all people, or only authenticated users, or you can also turn on moderation mode for every comments) 
 - Customizable theme, with built-in light/dark theme.
+- Also, you can [write your own Authentication provider and Data provider](#advanced-usages), and configure them with Discuzz.
 
 **To suggest anything, please join our [Discussion board](https://github.com/discuzz-app/discuzz/discussions).**
 
@@ -66,7 +67,7 @@ You can embed Discuzz in many ways:
 
 ### **Firebase**
 
-You'd need to create a Firebase project, and add a web platform. It will give you the config parameters.
+If you want to use Firebase as the Authentication & Data provider, you'd need to create a Firebase project, and add a web platform. It will give you the config parameters.
 
 ![ABI](./docs/firebase-web-code.png)
 
@@ -75,9 +76,9 @@ You can embed Discuzz in your website with the following code
 
 ```html
 <script src="https://discuzz.mph.am/static/js/main.js"></script>
-<x-discuzz 
-  service="--- PUT THE SERVICE CONFIG HERE ---" 
-  auths="-- PUT THE AUTHENTICATION METHODS YOU WANT HERE ---"
+<x-discuzz
+  service="{'auth':'[AUTH PROVIDER]','data':'[DATA PROVIDER]','config':'[SERVICE CONFIG]'}"
+  auths="[IDENTITY PROVIDER LIST]"
 ></x-discuzz>
 ```
 

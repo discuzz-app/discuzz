@@ -37,6 +37,8 @@ export const Discuzz = ({
   locale,
   logLevel = 'warn'
 }: DiscuzzProps) => {
+  console.log('[@discuzz/discuzz] LogLevel:' + logLevel)
+
   logger.setLevel(logLevel)
 
   return (

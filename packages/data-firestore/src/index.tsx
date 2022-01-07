@@ -65,7 +65,6 @@ type Post = BasePost & {
 }
 
 export default async (config: { [key: string]: string }, auth: Auth) => {
-  console.log('auth -> ', auth)
   const app = auth.data.app
   const firestore = getFirestore(app)
 
@@ -81,9 +80,6 @@ export default async (config: { [key: string]: string }, auth: Auth) => {
       isTokenAutoRefreshEnabled: true
     })
   }
-
-  console.log('app', app)
-  console.log('data', firestore)
 
   const usePostQuery: PostQuery = (id: string) => {
     const [post, setPost] = useState<Post | null>(null)

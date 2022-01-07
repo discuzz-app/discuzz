@@ -3,6 +3,6 @@ export const config = {
   richText: false,
   padding: 10,
   pagination: 10,
-  viewer: () => {},
-  composer: () => {}
+  viewer: undefined,
+  composer: undefined
 }

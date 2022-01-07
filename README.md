@@ -76,7 +76,7 @@ You can embed Discuzz in your website with the following code
 ```html
 <script src="https://discuzz.mph.am/static/js/main.js"></script>
 <x-discuzz 
-  service="--- PUT THE firebaseConfig HERE ---" 
+  service="--- PUT THE SERVICE CONFIG HERE ---" 
   auths="-- PUT THE AUTHENTICATION METHODS YOU WANT HERE ---"
 ></x-discuzz>
 ```
@@ -85,7 +85,7 @@ You can embed Discuzz in your website with the following code
 ```html
 <script src="https://discuzz.mph.am/static/js/main.js"></script>
 <x-discuzz 
-  service="{'apiKey':'AIzaSyDm837cbdbvkrAdYL9TAqUF3iML6UvZXk4','authDomain':'fire-talk-88.firebaseapp.com','projectId':'fire-talk-88','storageBucket':'fire-talk-88.appspot.com','messagingSenderId':'719566664522','appId':'1:719566664522:web:e1a9d26be22387e55b47b3'}" 
+  service="{'auth':'firebase', 'data': 'firestore', config: {'apiKey':'AIzaSyDm837cbdbvkrAdYL9TAqUF3iML6UvZXk4','authDomain':'fire-talk-88.firebaseapp.com','projectId':'fire-talk-88','storageBucket':'fire-talk-88.appspot.com','messagingSenderId':'719566664522','appId':'1:719566664522:web:e1a9d26be22387e55b47b3'}}" 
   auths="['google', 'apple', 'facebook', 'github', 'twitter', 'microsoft', 'yahoo']"
 /></x-discuzz>
 ```
@@ -97,22 +97,23 @@ You can embed Discuzz in your website with the following code
 ```bash
 yarn add @discuzz/discuzz
 ```
-2) Comment Viewer and Comment Composer
-```bash
-yarn add @discuzz/viewer-plaintext @discuzz/composer-plaintext
-```
-3) Locale
+2) Locale
 ```bash
 yarn add @discuzz/locale-en date-fns
+```
+3) Auth & Data provider
+```bash
+yarn add @discuzz/auth-firebase @discuzz/data-firestore firebase
 ```
 
 **Example component usage**
 ```jsx
-import { Discuzz } from '@discuzz/discuzz'
+import { Discuzz, Auth } from '@discuzz/discuzz'
 
 const LocaleProviderEn = lazy(() => import('@discuzz/locale-en'))
-const ComposerPlaintext = lazy(() => import('@discuzz/composer-plaintext'))
-const ViewerPlaintext = lazy(() => import('@discuzz/viewer-plaintext'))
+
+const AuthFirebase = (config: any) => import('@discuzz/auth-firebase').then((module: any) => module.default(config))
+const DataFirestore = (config: any, auth: Auth) => import('@discuzz/data-firestore').then((module: any) => module.default(config, auth))
 
 function App() {
   return (
@@ -120,18 +121,18 @@ function App() {
       <Discuzz
         url={global.location.href}
         service={{
-          apiKey: "AIzaSyDm837cbdbvkrAdYL9TAqUF3iML6UvZXk4",
-          authDomain: "fire-talk-88.firebaseapp.com",
-          projectId: "fire-talk-88",
-          storageBucket: "fire-talk-88.appspot.com",
-          messagingSenderId: "719566664522",
-          appId: "1:719566664522:web:e1a9d26be22387e55b47b3"
+          auth: AuthFirebase,
+          data: DataFirestore,
+          config: {
+            apiKey: "AIzaSyDm837cbdbvkrAdYL9TAqUF3iML6UvZXk4",
+            authDomain: "fire-talk-88.firebaseapp.com",
+            projectId: "fire-talk-88",
+            storageBucket: "fire-talk-88.appspot.com",
+            messagingSenderId: "719566664522",
+            appId: "1:719566664522:web:e1a9d26be22387e55b47b3"
+          }
         }}
         auths={['google', 'apple', 'facebook', 'github', 'twitter', 'microsoft', 'yahoo']}
-        config={{
-          composer: ComposerPlaintext,
-          viewer: ViewerPlaintext
-        }}
         locale={LocaleProviderEn}
       />
     </Suspense>
@@ -145,7 +146,7 @@ function App() {
 **Markdown support**
 
 ```bash
-yarn add @discuzz/viewer-markdown @discuzz/composer-markdown
+yarn add @discuzz/viewer-markdown @discuzz/composer-markdown rich-markdown-editor styled-components
 ```
 ```jsx
 import { Discuzz } from '@discuzz/discuzz'
@@ -154,18 +155,25 @@ const LocaleProviderEn = lazy(() => import('@discuzz/locale-en'))
 const ComposerMarkdown = lazy(() => import('@discuzz/composer-markdown'))
 const ViewerMarkdown = lazy(() => import('@discuzz/viewer-markdown'))
 
+const AuthFirebase = (config: any) => import('@discuzz/auth-firebase').then((module: any) => module.default(config))
+const DataFirestore = (config: any, auth: Auth) => import('@discuzz/data-firestore').then((module: any) => module.default(config, auth))
+
 function App() {
   return (
     <Suspense fallback={<span>Loading...</span>}>
       <Discuzz
         url={global.location.href}
         service={{
-          apiKey: "AIzaSyDm837cbdbvkrAdYL9TAqUF3iML6UvZXk4",
-          authDomain: "fire-talk-88.firebaseapp.com",
-          projectId: "fire-talk-88",
-          storageBucket: "fire-talk-88.appspot.com",
-          messagingSenderId: "719566664522",
-          appId: "1:719566664522:web:e1a9d26be22387e55b47b3"
+          auth: AuthFirebase,
+          data: DataFirestore,
+          config: {
+            apiKey: "AIzaSyDm837cbdbvkrAdYL9TAqUF3iML6UvZXk4",
+            authDomain: "fire-talk-88.firebaseapp.com",
+            projectId: "fire-talk-88",
+            storageBucket: "fire-talk-88.appspot.com",
+            messagingSenderId: "719566664522",
+            appId: "1:719566664522:web:e1a9d26be22387e55b47b3"
+          }
         }}
         auths={['google', 'apple', 'facebook', 'github', 'twitter', 'microsoft', 'yahoo']}
         config={{
@@ -192,7 +200,9 @@ You could write your own locale provider, using `createProvider` function, then 
 
 **Custom data & authentication provider**
 
-You could also write your own data & authentication provider to using other services instead of Firebase, as long as it follows the `auth.ts` and `posts.ts`.
+You could also write your own data & authentication provider to using other services instead of Firebase, as long as it fullfills the `Auth` and `Data` type.
+
+**Tip:** You can take a look at [auth-firebase](./packages/auth-firebase) and [data-firestore](./packages/data-firestore).
 
 
 ## **Contributing**

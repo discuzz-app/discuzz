@@ -17,19 +17,15 @@
     "start": "microbundle-crl watch --no-compress --format cjs"
   },
   "dependencies": {
-    "@discuzz/core": "^1.11.2",
+    "@discuzz/core": "*",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.2.5",
     "@mui/lab": "^5.0.0-alpha.61",
     "@mui/material": "^5.2.5",
-    "firebase": "^9.6.1",
     "loglevel": "^1.8.0",
-    "md5": "^2.3.0",
     "notistack": "^2.0.3",
-    "react-transition-group": "^4.4.2",
-    "use-immer": "^0.6.0",
-    "immer": "^9.0.7"
+    "react-transition-group": "^4.4.2"
   },
   "peerDependencies": {
     "react": "^17.0.0"

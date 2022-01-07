@@ -17,17 +17,14 @@
     "start": "microbundle-crl watch --no-compress --format cjs"
   },
   "dependencies": {
-    "@discuzz/core": "^1.11.2"
+    "@discuzz/core": "*",
+    "use-immer": "^0.6.0"
   },
   "peerDependencies": {
     "react": "^17.0.0",
-    "firebase": "^9.6.1",
-    "use-immer": "^0.6.0",
-    "immer": "^9.0.7"
+    "firebase": "^9.6.1"
   },
   "devDependencies": {
-    "use-immer": "^0.6.0",
-    "immer": "^9.0.7",
     "@types/node": "^16.7.13",
     "@types/react": "^17.0.20",
     "@types/react-dom": "^17.0.9",

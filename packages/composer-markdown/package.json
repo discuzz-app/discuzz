@@ -17,7 +17,7 @@
     "start": "microbundle-crl watch --no-compress --format cjs"
   },
   "dependencies": {
-    "@discuzz/core": "^1.11.2"
+    "@discuzz/core": "*"
   },
   "peerDependencies": {
     "react": "^17.0.0",

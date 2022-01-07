@@ -1,13 +1,8 @@
 name: Pre-release on Main
 
 on:
-  push:
-    branches: [ main ]
-    paths-ignore:
-      - '.gitlab-ci.yml'
-      - 'README.md'
-      - 'LICENSE'
-      - 'docs/**'
+  release:
+    types: [ prereleased ]
 
 jobs:
   prerelease:

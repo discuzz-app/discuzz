@@ -1,18 +1,14 @@
 name: Beta release on Develop
 
 on:
-  push:
-    branches: [ develop ]
-    paths-ignore:
-      - '.gitlab-ci.yml'
-      - 'README.md'
-      - 'LICENSE'
-      - 'docs/**'
+  release:
+    types: [ prereleased ]
       
 jobs:
   prerelease:
     name: Beta release
     runs-on: ubuntu-latest
+    if: ${{ github.event.release.target_commitish == 'develop' }}
 
     strategy:
       matrix:

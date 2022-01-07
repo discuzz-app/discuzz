@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from 'react'
 import ReactDOM from 'react-dom'
-import { Discuzz, Config, Theme, prefersDarkMode, Auth } from '@discuzz/discuzz'
+import { Discuzz, Config, Theme, prefersDarkMode, loadService } from '@discuzz/discuzz'
 
 const LocaleProviderEn = lazy(() => import('@discuzz/locale-en'))
 const LocaleProviderVi = lazy(() => import('@discuzz/locale-vi'))
@@ -9,8 +9,8 @@ const ComposerMarkdown = lazy(() => import('@discuzz/composer-markdown'))
 
 const ViewerMarkdown = lazy(() => import('@discuzz/viewer-markdown'))
 
-const AuthFirebase = async (config: any) => import('@discuzz/auth-firebase').then((module: any) => module.default(config))
-const DataFirestore = async (config: any, auth: Auth) => import('@discuzz/data-firestore').then((module: any) => module.default(config, auth))
+const AuthFirebase = loadService(() => import('@discuzz/auth-firebase'))
+const DataFirestore = loadService(() => import('@discuzz/data-firestore'))
 
 export class WebComponent extends HTMLElement {
   connectedCallback() {

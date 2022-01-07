@@ -34,3 +34,8 @@ export type Data = {
   useRejectPendingPostCommand: RejectPendingPostCommand
   useApprovePendingPostCommand: ApprovePendingPostCommand
 }
+
+export const loadService = (moduleLoader: () => Promise<any>) => async (...args:any[]) => {
+  const module = await moduleLoader()
+  return module.default(...args)
+}

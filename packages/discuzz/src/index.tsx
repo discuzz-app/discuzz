@@ -12,7 +12,7 @@ import { darkTheme, lightTheme } from 'config/mui'
 import { Theme } from 'enums/Theme'
 export { Theme } from 'enums/Theme'
 export { prefersDarkMode } from 'utils/darkMode'
-export { createProvider, Auth } from '@discuzz/core'
+export { createProvider, Auth, loadService } from '@discuzz/core'
 export type { ComposerProps, ContentProps, Config, ServiceSource } from '@discuzz/core'
 
 import logger, { LogLevelDesc } from 'loglevel'
@@ -37,8 +37,6 @@ export const Discuzz = ({
   locale,
   logLevel = 'warn'
 }: DiscuzzProps) => {
-  console.log('logLevel', logLevel)
-
   logger.setLevel(logLevel)
 
   return (

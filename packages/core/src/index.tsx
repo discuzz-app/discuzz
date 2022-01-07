@@ -29,6 +29,7 @@ export { PostUpdateResult } from 'enums/PostUpdateResult'
 export { PendingPostUpdateResult } from 'enums/PostUpdateResult'
 export { RequestState } from 'enums/RequestState'
 export type { Auth, Data } from 'services/source'
+export { loadService } from 'services/source'
 
 export type {
   AddPostCommand,

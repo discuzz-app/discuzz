@@ -108,12 +108,12 @@ yarn add @discuzz/auth-firebase @discuzz/data-firestore firebase
 
 **Example component usage**
 ```jsx
-import { Discuzz, Auth } from '@discuzz/discuzz'
+import { Discuzz, loadService } from '@discuzz/discuzz'
 
 const LocaleProviderEn = lazy(() => import('@discuzz/locale-en'))
 
-const AuthFirebase = (config: any) => import('@discuzz/auth-firebase').then((module: any) => module.default(config))
-const DataFirestore = (config: any, auth: Auth) => import('@discuzz/data-firestore').then((module: any) => module.default(config, auth))
+const AuthFirebase = loadService(() => import('@discuzz/auth-firebase'))
+const DataFirestore = loadService(() => import('@discuzz/data-firestore'))
 
 function App() {
   return (
@@ -155,8 +155,8 @@ const LocaleProviderEn = lazy(() => import('@discuzz/locale-en'))
 const ComposerMarkdown = lazy(() => import('@discuzz/composer-markdown'))
 const ViewerMarkdown = lazy(() => import('@discuzz/viewer-markdown'))
 
-const AuthFirebase = (config: any) => import('@discuzz/auth-firebase').then((module: any) => module.default(config))
-const DataFirestore = (config: any, auth: Auth) => import('@discuzz/data-firestore').then((module: any) => module.default(config, auth))
+const AuthFirebase = loadService(() => import('@discuzz/auth-firebase'))
+const DataFirestore = loadService(() => import('@discuzz/data-firestore'))
 
 function App() {
   return (

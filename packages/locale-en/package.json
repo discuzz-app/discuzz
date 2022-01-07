@@ -1,6 +1,6 @@
 {
   "name": "@discuzz/locale-en",
-  "version": "1.11.6",
+  "version": "1.11.8",
   "description": "Discuzz locale en",
   "author": "MartinPham",
   "license": "MIT",
@@ -17,7 +17,7 @@
     "start": "microbundle-crl watch --no-compress --format cjs"
   },
   "dependencies": {
-    "@discuzz/core": "^1.11.6"
+    "@discuzz/core": "^1.11.8"
   },
   "peerDependencies": {
     "date-fns": "^2.27.0",

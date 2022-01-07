@@ -30,6 +30,7 @@
 - [Homepage](#homepage)
 - [Features](#features)
 - [Usage](#usage)
+	- [Examples](#examples)
 	- [Firebase](#firebase)
 	- [Web Component](#web-component)
 	- [React Component](#react-component)
@@ -64,6 +65,9 @@ You can embed Discuzz in many ways:
 - As a Web Component
 - As a React Component
 - ...
+
+### **Examples**
+There are several example integrations, which you can [check here](https://github.com/discuzz-app?q=example)
 
 ### **Firebase**
 

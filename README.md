@@ -48,7 +48,7 @@
 
 ## **Features**
 
-- Disuzz is an open source comment system, that you can embed in your website to increase reader engagement, grow audience and traffic. 
+- Discuzz is an open source comment system, that you can embed in your website to increase reader engagement, grow audience and traffic. 
 - Supporting Firestore as the data storage, with Realtime and Offline support. You can use Discuzz easily without any backend server.
 - With Firebase Auth support, you can provide many ways to authenticate for your users.
 - You can easily config the access control, to adjust permissions (Example: open to all people, or only authenticated users, or you can also turn on moderation mode for every comments) 

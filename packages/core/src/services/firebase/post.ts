@@ -163,6 +163,7 @@ export const usePostListQuery: PostListQuery = (
   }, [posts, lastPostDoc])
 
   useEffect(() => {
+    if (!firestore) return
     if (parent === null || parent.replied > 0) {
       const queryArgs: any[] = [
         where('url', '==', url),

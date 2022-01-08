@@ -1,5 +1,5 @@
 import React from 'react'
-import { ThemeProvider } from '@mui/material/styles'
+import { ThemeProvider, createTheme } from '@mui/material/styles'
 import ScopedCssBaseline from '@mui/material/ScopedCssBaseline'
 import {
   DiscuzzCore,
@@ -21,7 +21,7 @@ export type DiscuzzProps = {
   url: string,
   service: ServiceSource,
   auths: SignInProviderId[],
-  theme?: Theme,
+  theme?: Theme | any,
   config?: Config,
 
   locale: any,
@@ -41,10 +41,14 @@ export const Discuzz = ({
 
   logger.setLevel(logLevel)
 
+  let muiTheme = theme
+
+  if (typeof theme === 'string') {
+    muiTheme = (theme === Theme.AUTO ? prefersDarkMode : (theme === Theme.DARK)) ? darkTheme : lightTheme
+  }
+
   return (
-    <ThemeProvider theme={
-      (theme === Theme.AUTO ? prefersDarkMode : (theme === Theme.DARK)) ? darkTheme : lightTheme
-    }>
+    <ThemeProvider theme={createTheme(muiTheme)}>
       <ScopedCssBaseline enableColorScheme>
         <DiscuzzCore
           url={url}

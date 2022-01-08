@@ -35,7 +35,11 @@ export class WebComponent extends HTMLElement {
     }
 
     if (this.getAttribute('theme')) {
-      options.theme = this.getAttribute('theme') as Theme
+      try {
+        options.theme = JSON.parse(this.getAttribute('theme')!.replace(/'/g, '"'))!
+      } catch (err) {
+        options.theme = this.getAttribute('theme')
+      }
     }
     if (this.getAttribute('locale')) {
       options.locale = this.getAttribute('locale')!

@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "https://discuzz.mph.am/static/js/main.ef18c6d9.js",
+    "main.js": "https://discuzz.mph.am/static/js/main.344003de.js",
     "static/js/956.f1b8aad7.chunk.js": "https://discuzz.mph.am/static/js/956.f1b8aad7.chunk.js",
     "static/js/30.0100305e.chunk.js": "https://discuzz.mph.am/static/js/30.0100305e.chunk.js",
     "static/js/967.b13dbfed.chunk.js": "https://discuzz.mph.am/static/js/967.b13dbfed.chunk.js",
@@ -14,6 +14,6 @@
     "index.html": "https://discuzz.mph.am/index.html"
   },
   "entrypoints": [
-    "static/js/main.ef18c6d9.js"
+    "static/js/main.344003de.js"
   ]
 }

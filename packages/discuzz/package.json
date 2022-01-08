@@ -1,6 +1,6 @@
 {
   "name": "@discuzz/discuzz",
-  "version": "1.11.15",
+  "version": "1.11.16",
   "description": "Discuzz component",
   "author": "MartinPham",
   "license": "MIT",
@@ -18,7 +18,7 @@
     "start": "microbundle-crl watch --no-compress --format cjs"
   },
   "dependencies": {
-    "@discuzz/core": "^1.11.15",
+    "@discuzz/core": "^1.11.16",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@mui/icons-material": "^5.2.5",

@@ -1,6 +1,6 @@
 {
   "name": "@discuzz/viewer-markdown",
-  "version": "1.11.11",
+  "version": "1.11.15",
   "description": "Discuzz viewer plaintext",
   "author": "MartinPham",
   "license": "MIT",
@@ -17,7 +17,7 @@
     "start": "microbundle-crl watch --no-compress --format cjs"
   },
   "dependencies": {
-    "@discuzz/core": "^1.11.11"
+    "@discuzz/core": "^1.11.15"
   },
   "peerDependencies": {
     "markdown-to-jsx": "^7.1.5",

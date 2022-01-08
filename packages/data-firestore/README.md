@@ -40,7 +40,7 @@ You can extends the rules from [firestore.rules.example](../../firestore.rules.e
 
 ## **Contributing**
 
-Please contribute using [GitHub Flow](https://guides.github.com/introduction/flow). Create a branch, add commits, and then [open a pull request](https://github.com/@discuzz/discuzz/compare).
+Please contribute using [GitHub Flow](https://guides.github.com/introduction/flow). Create a branch, add commits, and then [open a pull request](https://github.com/@discuzz-app/discuzz/compare).
 
 ## **License**
 

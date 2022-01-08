@@ -284,7 +284,7 @@ You could also write your own data & authentication provider to using other serv
 
 ## **Contributing**
 
-Please contribute using [GitHub Flow](https://guides.github.com/introduction/flow). Create a branch, add commits, and then [open a pull request](https://github.com/@discuzz/discuzz/compare).
+Please contribute using [GitHub Flow](https://guides.github.com/introduction/flow). Create a branch, add commits, and then [open a pull request](https://github.com/@discuzz-app/discuzz/compare).
 
 ## **License**
 

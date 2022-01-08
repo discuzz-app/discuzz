@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from 'react'
 import ReactDOM from 'react-dom'
-import { Discuzz, Config, Theme, prefersDarkMode, loadService } from '@discuzz/discuzz'
+import { Discuzz, Config, prefersDarkMode, loadService } from '@discuzz/discuzz'
 
 const LocaleProviderEn = lazy(() => import('@discuzz/locale-en'))
 const LocaleProviderVi = lazy(() => import('@discuzz/locale-vi'))
@@ -91,11 +91,7 @@ export class WebComponent extends HTMLElement {
 
 (global as any).prefersDarkMode = prefersDarkMode
 
-if (process.env.NODE_ENV === 'production') {
-  if (global.customElements) {
-    customElements.define('x-discuzz', WebComponent)
-  }
-} else {
+if (process.env.NODE_ENV === 'development') {
   customElements.define('x-discuzz-dev', WebComponent)
 
   const url = new URL(global.location.toString())
@@ -116,4 +112,6 @@ if (process.env.NODE_ENV === 'production') {
       logLevel="debug"
   ></x-discuzz-dev>
   `
+} else if (global.customElements) {
+  customElements.define('x-discuzz', WebComponent)
 }

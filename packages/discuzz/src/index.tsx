@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
+import useMediaQuery from '@mui/material/useMediaQuery'
 import ScopedCssBaseline from '@mui/material/ScopedCssBaseline'
 import {
   DiscuzzCore,
@@ -7,7 +8,7 @@ import {
   Config,
   ServiceSource
 } from '@discuzz/core'
-import { prefersDarkMode } from 'utils/darkMode'
+// import { prefersDarkMode } from 'utils/darkMode'
 import { darkTheme, lightTheme } from 'config/mui'
 import { Theme } from 'enums/Theme'
 export { Theme } from 'enums/Theme'
@@ -41,14 +42,20 @@ export const Discuzz = ({
 
   logger.setLevel(logLevel)
 
-  let muiTheme = theme
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 
-  if (typeof theme === 'string') {
-    muiTheme = (theme === Theme.AUTO ? prefersDarkMode : (theme === Theme.DARK)) ? darkTheme : lightTheme
-  }
+  const muiTheme: any = useMemo(() => {
+    let themeObject = theme
+    if (typeof themeObject === 'string') {
+      themeObject = (theme === Theme.AUTO ? prefersDarkMode : (theme === Theme.DARK)) ? darkTheme : lightTheme
+    }
+
+    return createTheme(themeObject)
+  }, [theme, prefersDarkMode])
+
 
   return (
-    <ThemeProvider theme={createTheme(muiTheme)}>
+    <ThemeProvider theme={muiTheme}>
       <ScopedCssBaseline enableColorScheme>
         <DiscuzzCore
           url={url}

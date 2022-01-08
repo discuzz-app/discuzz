@@ -266,9 +266,11 @@ function App() {
 
 **Theming**
 
-By default, Discuzz will check the current user's browser light/dark preference to setup the correct theme.
+By default, Discuzz will check the current user's browser light/dark preference to setup theme palette.
 
-Discuzz is built on top of MUI library. You can customize by using the `<ThemeProvider/>` component, to wrap outside the `<DiscuzzCore />` component.
+You can set it manually by passing `light` or `dark` to the `theme` parameter.
+
+Discuzz is built on top of MUI library. You can fully customize by passing a theme object into the `theme` parameter.
 
 
 **Custom locale provider**

@@ -1,6 +1,6 @@
 {
   "name": "@discuzz/auth-firebase",
-  "version": "1.11.16",
+  "version": "1.11.18",
   "description": "Discuzz auth firebase",
   "author": "MartinPham",
   "license": "MIT",
@@ -18,7 +18,7 @@
     "start": "microbundle-crl watch --no-compress --format cjs"
   },
   "dependencies": {
-    "@discuzz/core": "^1.11.16",
+    "@discuzz/core": "^1.11.18",
     "md5": "^2.3.0"
   },
   "peerDependencies": {

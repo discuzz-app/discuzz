@@ -1,6 +1,6 @@
 import React from 'react'
 import { useConfig } from 'components/App'
-import useTheme from '@mui/material/styles/useTheme'
+import { useTheme } from '@mui/material/styles'
 import InputBase from '@mui/material/InputBase'
 
 export type ComposerProps = {

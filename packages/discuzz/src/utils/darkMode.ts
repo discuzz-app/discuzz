@@ -1,1 +1,1 @@
-export const prefersDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+export const prefersDarkMode = global.matchMedia && global.matchMedia('(prefers-color-scheme: dark)').matches

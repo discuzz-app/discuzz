@@ -1,5 +1,5 @@
 import useMediaQuery from '@mui/material/useMediaQuery'
-import useTheme from '@mui/material/styles/useTheme'
+import { useTheme } from '@mui/material/styles'
 import { Breakpoint } from '@mui/material'
 
 export const useSizeCheck = (size: Breakpoint | number) => {

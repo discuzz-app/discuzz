@@ -18,7 +18,8 @@
   },
   "dependencies": {
     "@discuzz/core": "^1.11.11",
-    "use-immer": "^0.6.0"
+    "use-immer": "^0.6.0",
+    "immer": "^9.0.7"
   },
   "peerDependencies": {
     "firebase": "^9.6.1",

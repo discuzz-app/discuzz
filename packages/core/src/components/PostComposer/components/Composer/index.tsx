@@ -10,13 +10,6 @@ export type ComposerProps = {
   theme?: string
 }
 
-// seems a bug with bundler
-(global as any).process = (global as any).process || {
-  env: {
-    ...(process as any).env
-  }
-}
-
 const DefaultComposer = ({ onChange, value, placeholder, theme }: ComposerProps) => {
   return (
     <InputBase

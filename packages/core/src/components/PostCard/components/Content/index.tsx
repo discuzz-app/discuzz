@@ -21,7 +21,6 @@ const DefaultViewer = ({ children }: ContentProps) => {
   )
 }
 
-
 export const Content = (props: ContentProps) => {
   const config = useConfig()
   const Viewer = config.viewer || DefaultViewer

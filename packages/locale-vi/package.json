@@ -13,6 +13,7 @@
   },
   "scripts": {
     "libbuild": "run-s build",
+    "prebuild": "rm -rf dist",
     "build": "microbundle-crl --format cjs",
     "start": "microbundle-crl watch --no-compress --format cjs"
   },

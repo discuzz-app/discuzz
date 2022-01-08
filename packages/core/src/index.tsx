@@ -11,7 +11,6 @@ import { AuthProvider, SignInProviderId } from 'components/AuthProvider'
 import { config as appConfig } from 'config/app'
 import { LocaleProvider } from 'components/LocaleProvider'
 
-
 export { createProvider, prefersLocale } from 'utils/locale'
 export type { ProviderProps } from 'utils/locale'
 export { SignInProviderId, useAuth } from 'components/AuthProvider'
@@ -78,3 +77,4 @@ export const DiscuzzCore = ({
     </SnackbarProvider>
   )
 }
+

@@ -49,6 +49,8 @@ jobs:
       - name: Build
         run: |
           export BASE_URL=$PUBLIC_URL
+          cp README.md packages/discuzz/README.md
+          cp README.md packages/core/README.md
           yarn build
         env:
           SKIP_PREFLIGHT_CHECK: true

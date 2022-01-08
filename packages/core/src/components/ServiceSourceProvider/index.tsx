@@ -15,9 +15,9 @@ export const ServiceSourceProvider = ({ source, children }: ServiceSourceProvide
   const [data, setData] = useState<Data | undefined>(undefined)
 
   useEffect(() => {
-    source.auth(source.config)
+    Promise.resolve(source.auth(source.config))
       .then((authObject: Auth) => {
-        source.data(source.config, authObject)
+        Promise.resolve(source.data(source.config, authObject))
           .then(setData)
 
         setAuth(authObject)

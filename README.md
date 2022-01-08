@@ -113,6 +113,45 @@ yarn add @discuzz/auth-firebase @discuzz/data-firestore firebase
 
 **Example component usage**
 ```jsx
+import { Discuzz } from '@discuzz/discuzz'
+
+import LocaleProviderEn from '@discuzz/locale-en'
+import AuthFirebase from '@discuzz/auth-firebase'
+import DataFirestore from '@discuzz/data-firestore'
+
+function App() {
+  return (
+    <Discuzz
+      url={global.location && global.location.href}
+      service={{
+        auth: AuthFirebase,
+        data: DataFirestore,
+        config: {
+          apiKey: "AIzaSyDm837cbdbvkrAdYL9TAqUF3iML6UvZXk4",
+          authDomain: "fire-talk-88.firebaseapp.com",
+          projectId: "fire-talk-88",
+          storageBucket: "fire-talk-88.appspot.com",
+          messagingSenderId: "719566664522",
+          appId: "1:719566664522:web:e1a9d26be22387e55b47b3"
+        }
+      }}
+      auths={['google', 'apple', 'facebook', 'github', 'twitter', 'microsoft', 'yahoo']}
+      locale={LocaleProviderEn}
+    />
+  )
+}
+```
+
+
+### **Advanced usages**
+
+
+**Code splitting & Lazy load**
+
+You can config Discuzz to load services and providers on-demand with `Suspense`.
+
+```jsx
+import { lazy, Suspense } from 'react'
 import { Discuzz, loadService } from '@discuzz/discuzz'
 
 const LocaleProviderEn = lazy(() => import('@discuzz/locale-en'))
@@ -145,20 +184,13 @@ function App() {
 }
 ```
 
+On NextJS, you can lazy load modules with `next/dynamic`.
 
-### **Advanced usages**
-
-**Markdown support**
-
-```bash
-yarn add @discuzz/viewer-markdown @discuzz/composer-markdown rich-markdown-editor styled-components
-```
 ```jsx
-import { Discuzz } from '@discuzz/discuzz'
+import lazy from 'next/dynamic'
+import { Discuzz, loadService } from '@discuzz/discuzz'
 
-const LocaleProviderEn = lazy(() => import('@discuzz/locale-en'))
-const ComposerMarkdown = lazy(() => import('@discuzz/composer-markdown'))
-const ViewerMarkdown = lazy(() => import('@discuzz/viewer-markdown'))
+const LocaleProviderEn = lazy(() => import('@discuzz/locale-en'), { ssr: false })
 
 const AuthFirebase = loadService(() => import('@discuzz/auth-firebase'))
 const DataFirestore = loadService(() => import('@discuzz/data-firestore'))
@@ -181,6 +213,47 @@ function App() {
           }
         }}
         auths={['google', 'apple', 'facebook', 'github', 'twitter', 'microsoft', 'yahoo']}
+        locale={LocaleProviderEn}
+      />
+    </Suspense>
+  );
+}
+```
+
+
+**Markdown support**
+
+```bash
+yarn add @discuzz/viewer-markdown @discuzz/composer-markdown rich-markdown-editor styled-components
+```
+```jsx
+import { Discuzz } from '@discuzz/discuzz'
+
+const LocaleProviderEn = lazy(() => import('@discuzz/locale-en'))
+const ComposerMarkdown = lazy(() => import('@discuzz/composer-markdown'))
+const ViewerMarkdown = lazy(() => import('@discuzz/viewer-markdown'))
+
+const AuthFirebase = loadService(() => import('@discuzz/auth-firebase'))
+const DataFirestore = loadService(() => import('@discuzz/data-firestore'))
+
+function App() {
+  return (
+    <Suspense fallback={<span>Loading...</span>}>
+      <Discuzz
+        url={global.location && global.location.href}
+        service={{
+          auth: AuthFirebase,
+          data: DataFirestore,
+          config: {
+            apiKey: "AIzaSyDm837cbdbvkrAdYL9TAqUF3iML6UvZXk4",
+            authDomain: "fire-talk-88.firebaseapp.com",
+            projectId: "fire-talk-88",
+            storageBucket: "fire-talk-88.appspot.com",
+            messagingSenderId: "719566664522",
+            appId: "1:719566664522:web:e1a9d26be22387e55b47b3"
+          }
+        }}
+        auths={['google', 'apple', 'facebook', 'github', 'twitter', 'microsoft', 'yahoo']}
         config={{
           composer: ComposerMarkdown,
           viewer: ViewerMarkdown
@@ -188,9 +261,10 @@ function App() {
         locale={LocaleProviderEn}
       />
     </Suspense>
-  );
+  )
 }
 ```
+
 
 **Theming**
 

@@ -14,4 +14,4 @@ export const createProvider = (value: Locale) => ({ children }: ProviderProps) =
   )
 }
 
-export const prefersLocale = (navigator.language && navigator.language.split('-')[0]) || 'en'
+export const prefersLocale = (global.navigator && global.navigator.language && global.navigator.language.split('-')[0]) || 'en'

@@ -163,7 +163,7 @@ function App() {
   return (
     <Suspense fallback={<span>Loading...</span>}>
       <Discuzz
-        url={global.location.href}
+        url={global.location && global.location.href}
         service={{
           auth: AuthFirebase,
           data: DataFirestore,
@@ -197,25 +197,23 @@ const DataFirestore = loadService(() => import('@discuzz/data-firestore'))
 
 function App() {
   return (
-    <Suspense fallback={<span>Loading...</span>}>
-      <Discuzz
-        url={global.location.href}
-        service={{
-          auth: AuthFirebase,
-          data: DataFirestore,
-          config: {
-            apiKey: "AIzaSyDm837cbdbvkrAdYL9TAqUF3iML6UvZXk4",
-            authDomain: "fire-talk-88.firebaseapp.com",
-            projectId: "fire-talk-88",
-            storageBucket: "fire-talk-88.appspot.com",
-            messagingSenderId: "719566664522",
-            appId: "1:719566664522:web:e1a9d26be22387e55b47b3"
-          }
-        }}
-        auths={['google', 'apple', 'facebook', 'github', 'twitter', 'microsoft', 'yahoo']}
-        locale={LocaleProviderEn}
-      />
-    </Suspense>
+    <Discuzz
+      url={global.location && global.location.href}
+      service={{
+        auth: AuthFirebase,
+        data: DataFirestore,
+        config: {
+          apiKey: "AIzaSyDm837cbdbvkrAdYL9TAqUF3iML6UvZXk4",
+          authDomain: "fire-talk-88.firebaseapp.com",
+          projectId: "fire-talk-88",
+          storageBucket: "fire-talk-88.appspot.com",
+          messagingSenderId: "719566664522",
+          appId: "1:719566664522:web:e1a9d26be22387e55b47b3"
+        }
+      }}
+      auths={['google', 'apple', 'facebook', 'github', 'twitter', 'microsoft', 'yahoo']}
+      locale={LocaleProviderEn}
+    />
   );
 }
 ```
@@ -268,9 +266,11 @@ function App() {
 
 **Theming**
 
-By default, Discuzz will check the current user's browser light/dark preference to setup the correct theme.
+By default, Discuzz will check the current user's browser light/dark preference to setup theme palette.
 
-Discuzz is built on top of MUI library. You can customize by using the `<ThemeProvider/>` component, to wrap outside the `<DiscuzzCore />` component.
+You can set it manually by passing `light` or `dark` to the `theme` parameter.
+
+Discuzz is built on top of MUI library. You can fully customize by passing a theme object into the `theme` parameter.
 
 
 **Custom locale provider**
@@ -286,7 +286,7 @@ You could also write your own data & authentication provider to using other serv
 
 ## **Contributing**
 
-Please contribute using [GitHub Flow](https://guides.github.com/introduction/flow). Create a branch, add commits, and then [open a pull request](https://github.com/@discuzz/discuzz/compare).
+Please contribute using [GitHub Flow](https://guides.github.com/introduction/flow). Create a branch, add commits, and then [open a pull request](https://github.com/@discuzz-app/discuzz/compare).
 
 ## **License**
 

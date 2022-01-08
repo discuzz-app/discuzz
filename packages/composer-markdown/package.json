@@ -1,6 +1,6 @@
 {
   "name": "@discuzz/composer-markdown",
-  "version": "1.11.15",
+  "version": "1.11.16",
   "description": "Discuzz composer markdown",
   "author": "MartinPham",
   "license": "MIT",
@@ -18,7 +18,7 @@
     "start": "microbundle-crl watch --no-compress --format cjs"
   },
   "dependencies": {
-    "@discuzz/core": "^1.11.15"
+    "@discuzz/core": "^1.11.16"
   },
   "peerDependencies": {
     "react": "^17.0.0",
